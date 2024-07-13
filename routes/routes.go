@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"net/http"
+	handler "entry-exit-api/handler/resident"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,10 +9,8 @@ import (
 func InitializeRoutes(router *gin.Engine) {
 	v1 := router.Group("/v1")
 	{
-		v1.GET("/", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, gin.H{
-				"ok": "success",
-			})
-		})
+		v1.GET("/resident/:cpf", handler.GetResidentEntrysAndExits)
+		v1.POST("/resident-entry", handler.ResidentEntry)	
+		v1.PUT("/resident-exit/:cpf", handler.ResidentExit)
 	}
 }
