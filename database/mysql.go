@@ -12,19 +12,23 @@ func DbConnection() (*gorm.DB, error) {
 
 	db, err := gorm.Open(mysql.Open(connection_string), &gorm.Config{})
 	if err != nil {
+		println(err)
 		return nil, err
 	}
 
 	err = migrations.MigrateResidentTable(db)
 	if err != nil {
+		println(err)
 		return nil, err
 	}
 
 	err = migrations.AddTableVisitor(db)
 	if err != nil {
+		println(err)
 		return nil, err
 	}
 
 	return db, nil
 
 }
+ 
