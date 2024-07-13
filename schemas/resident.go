@@ -11,5 +11,5 @@ type Resident struct {
 	Cpf         string    `json:"cpf"`
 	HouseNumber int64     `json:"house_number"`
 	EntryTime   time.Time `json:"entry_time"`
-	ExitTime    time.Time `json:"exit_time"`
+	ExitTime    *time.Time `json:"exit_time"`
 }
