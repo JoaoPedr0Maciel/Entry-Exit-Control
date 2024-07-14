@@ -11,11 +11,11 @@ import (
 
 func ResidentExit(ctx *gin.Context) {
 	db := database.GetMysql()
-	cpf := ctx.Query("cpf")
+	cpf := ctx.Param("cpf")
 
 	resident := schemas.Resident{}
 
-	if err := db.First(&resident, cpf).Error; err != nil {
+	if err := db.Where("cpf = ? AND exit_time IS NULL", cpf).First(&resident).Error; err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
       "error": "Resident not found",
       "details": err.Error(),
